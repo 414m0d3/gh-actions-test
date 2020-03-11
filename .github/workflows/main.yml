@@ -27,6 +27,6 @@ jobs:
           # Directory containing the build artifact to deploy (default: repo root)
           srcDir: build
           # Destination repo (default: current repo)
-          destRepo: 414m0d3/gh-actions-test.github.io
+          destRepo: 414m0d3/gh-actions-test
           # Destination branch (required)
           destBranch: gh-pages
