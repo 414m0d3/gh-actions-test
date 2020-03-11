@@ -1,0 +1,32 @@
+name: "Build and Deploy"
+# Only deploy from `master`
+on:
+  push:
+    branches:
+      - dev
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      # Checkout the branch that triggered the workflow.
+      - name: Checkout
+        uses: actions/checkout@dev
+
+      # Run your build step
+      - name: Build
+        run: npm run build
+
+      # Deploy using `demurgos/ga-deploy-git`
+      - name: Deploy
+        uses: demurgos/ga-deploy-git@v1
+        with:
+          # Personnal access token with `public_repo` or `repo` permission (required)
+          # It is defined in the `ACCESS_TOKEN` secret.
+          accessToken: ${{ secrets.ACCESS_TOKEN }}
+          # Directory containing the build artifact to deploy (default: repo root)
+          srcDir: build
+          # Destination repo (default: current repo)
+          destRepo: 414m0d3/gh-actions-test.github.io
+          # Destination branch (required)
+          destBranch: gh-pages
